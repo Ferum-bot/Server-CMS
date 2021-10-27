@@ -105,7 +105,7 @@ class ServerController @Autowired constructor(
         @PathVariable(name = "fileName")
         fileName: String,
     ): ByteArray {
-        val path = Paths.get(System.getProperty("user.home") + "Documents/TestImages/" + fileName)
+        val path = Paths.get(System.getProperty("user.home") + "/Documents/TestImages/" + fileName)
         return Files.readAllBytes(path)
     }
 }
