@@ -8,12 +8,12 @@ import {Server} from "../interfaces/server";
 @Injectable({ providedIn: 'root' })
 export class ServerService {
 
-    private static readonly ALL_SERVERS_URL: string = 'http://localhost:8080/server/list'
+    private static readonly ALL_SERVERS_URL: string = 'http://localhost:8080/server/all'
     private static readonly SAVE_SERVER_URL: string = 'http://localhost:8080/server/save'
     private static readonly PING_SERVER_URL: string = 'http://localhost:8080/server/ping'
     private static readonly DELETE_SERVER_URL: string = 'http://localhost:8080/server/delete/name'
 
-    private readonly PAGE_NUMBER: number = 1
+    private readonly PAGE_NUMBER: number = 0
     private readonly PAGE_SIZE: number = 20
 
     constructor(private http: HttpClient) {  }
