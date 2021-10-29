@@ -1,0 +1,28 @@
+.Header {
+    width: 1fr;
+    height: 60px;
+    background-color: #b5fcff;
+    margin-top: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.HeaderTitle {
+    text-align: center;
+}
+
+.MainBlock {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.Footer {
+
+}
+
+.Slider {
+    width: 400px;
+}
