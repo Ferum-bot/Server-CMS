@@ -6,8 +6,6 @@ import {CustomResponse} from "./interfaces/custom-response";
 import {catchError, map, startWith} from "rxjs/operators";
 import {DataState} from "./enum/data-state.enum";
 import {Server} from "./interfaces/server";
-import {Status} from "./enum/status.enum";
-import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-root',
@@ -18,73 +16,21 @@ export class AppComponent implements OnInit {
 
   public appState$?: Observable<AppState<CustomResponse>>;
 
-  public testData: Server[] = [
-      {
-          id: 0,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP
-      },
-      {
-          id: 1,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP
-      },
-      {
-          id: 2,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP,
-      },
-      {
-          id: 3,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP,
-      },
-      {
-          id: 4,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP,
-      },
-      {
-          id: 5,
-          idAddress: "12324",
-          name: "Name",
-          memory: "twfrwfsdfsdf",
-          type: "First",
-          imageUrl: "asasasa",
-          status: Status.SERVER_UP,
-      },
-  ];
+  public showLoader: boolean = true;
 
-  public dataSource = new MatTableDataSource(this.testData);
+  public dataSource: Server[] = []
 
-  public displayedColumns: string[] = ['id', 'ipAddress', 'name', 'memory', 'type', 'imageUrl', 'status']
+  public displayedColumns: string[] = ['id', 'ipAddress', 'name', 'memory', 'type', 'imageUrl', 'status', 'actions'];
 
   constructor(private service: ServerService) {  }
 
   ngOnInit(): void {
-      this.appState$ = this.service.getAllServers()
+      this.service.getAllServers()
           .pipe(
               map(response => {
+                  console.log(response)
+                  this.showLoader = false
+                  this.dataSource = response?.data as Server[] || []
                   return {
                     dataState: DataState.LOADED,
                     appData: response
@@ -102,7 +48,18 @@ export class AppComponent implements OnInit {
                 })
               })
           )
+          .subscribe()
   }
 
+  onPingServerClicked(serverId: number) {
+      console.log("Called ping server with: " + serverId)
+  }
 
+  onEditServerClicked(serverId: number) {
+      console.log("Called edit server with: " + serverId)
+  }
+
+  onDeleteServerClicked(serverId: number) {
+      console.log("Called delete server with: " + serverId)
+  }
 }
