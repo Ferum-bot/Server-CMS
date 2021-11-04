@@ -1,0 +1,84 @@
+<ng-container>
+    <mat-toolbar color="primary" class="Toolbar">
+
+        <div class="ToolbarItem">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span>Server CMS</span>
+            <span class="example-spacer"></span>
+        </div>
+
+        <div class="ToolbarItem">
+            <button mat-icon-button class="add-icon ToolbarAddIcon" aria-label="Example icon-button with heart icon" >
+                <mat-icon [inline]="true">add</mat-icon>
+            </button>
+        </div>
+
+    </mat-toolbar>
+</ng-container>
+
+<div class="MainBlock">
+    <ng-container>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!showLoader">
+
+            <!--  Id column  -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Position</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+
+            <!--  Ip address column  -->
+            <ng-container matColumnDef="ipAddress">
+                <th mat-header-cell *matHeaderCellDef>Ip Address</th>
+                <td mat-cell *matCellDef="let element">{{element.idAddress}}</td>
+            </ng-container>
+
+            <!--  Name column  -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <!--  Memory column  -->
+            <ng-container matColumnDef="memory">
+                <th mat-header-cell *matHeaderCellDef>Memory</th>
+                <td mat-cell *matCellDef="let element">{{element.memory}}</td>
+            </ng-container>
+
+            <!--  Type column  -->
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef>Type</th>
+                <td mat-cell *matCellDef="let element">{{element.type}}</td>
+            </ng-container>
+
+            <!--  Image url column  -->
+            <ng-container matColumnDef="imageUrl">
+                <th mat-header-cell *matHeaderCellDef>Image url</th>
+                <td mat-cell *matCellDef="let element">{{element.imageUrl}}</td>
+            </ng-container>
+
+            <!--  Status column  -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.status}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary" (click)="onPingServerClicked(element.id)" class="ActionButton">Ping</button>
+                    <button mat-raised-button color="accent" (click)="onEditServerClicked(element.id)" class="ActionButton">Edit</button>
+                    <button mat-raised-button color="warn" (click)="onDeleteServerClicked(element.id)" class="ActionButton">Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </ng-container>
+
+    <div class="Loader" *ngIf="showLoader">
+        <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+</div>
